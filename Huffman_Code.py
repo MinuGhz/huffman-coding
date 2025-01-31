@@ -22,6 +22,7 @@ class HuffmanCode:
         self.path = path
         self.__heap = []
         self.__code = {}
+        self.__reversecode = {}
         
     #def __lt__(self , other):
        # return self.frequency < other.frequency
@@ -67,6 +68,7 @@ class HuffmanCode:
         
         if root.value is not None:
             self.__code[root.value] = curr_bits
+            self.__reversecode[curr_bits] = root.value
             return
         
         self.__Build_Tree_Code_Helper(root.left, curr_bits +'0')
@@ -143,7 +145,57 @@ class HuffmanCode:
         return output_path
     
     
+
+    def __Remove_Padding(self , text):
+        
+        padded_info = text[:8]
+        padding_value = int(padded_info,2)
+        text = text[8:]
+        text = text[:-1*padding_value]
+        return text
+        
+        
+    def __Decoded_Text(self , text):
+        current_bits = ''
+        decoded_text = ''
+        
+        for char in text:
+            current_bits += char
+            if current_bits in self.__reversecode:
+                decoded_text += self.__reversecode[current_bits]
+                current_bits = ''
+        return decoded_text        
+    
+    def decompress(self , input_path):
+        
+        print("DECOMPRESSION STARTS...")
+        filename , file_extension = os.path.splitext(input_path)
+        output_path = filename + '_decompressed' + '.txt'
+        
+        with open(input_path , 'rb') as file , open(output_path , 'w') as output:
+            bit_string = ''
+            byte = file.read(1)
+            
+            while byte:
+                byte = ord(byte)
+                bits = bin(byte)[2:].rjust(8 , '0')
+                bit_string += bits
+                byte = file.read(1)
+                
+            text_after_removing_padding = self.__Remove_Padding(bit_string) 
+            actual_text = self.__Decoded_Text(text_after_removing_padding)
+            
+            output.write(actual_text)
+       
+        print("DECOMPRESSED SUCCESSFULLY!")    
+        return output_path
+            
+    
+    
     
 path = input("ENTER THE PATH OF YOUR FILE: ")    
 h = HuffmanCode(path)
-h.compression()    
+compressed_file = h.compression() 
+
+
+h.decompress(compressed_file)   
