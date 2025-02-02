@@ -154,5 +154,7 @@ class HuffmanCode:
 # Program execution
 path = input("ENTER THE PATH OF YOUR FILE: ")
 huffman = HuffmanCode(path)
+
 compressed_file = huffman.compress()
+
 huffman.decompress(compressed_file)
