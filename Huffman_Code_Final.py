@@ -187,5 +187,3 @@ Huffman = HuffmanCode("large_file.bin")
 #Huffman.compress()
 
 Huffman.decompress("large_file.bin")
-
-print("Hallo")
