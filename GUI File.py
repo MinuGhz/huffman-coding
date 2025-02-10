@@ -47,7 +47,9 @@ def open_decoding_window(output = ""):
     ctk.CTkLabel(dec_win, text="Decoding Output:", font=("Arial", 14)).pack(pady=10)
     text_box = scrolledtext.ScrolledText(dec_win, width=50, height=10)
     text_box.pack(pady=5)
-    text_box.insert("end", output)
+    for item in output:
+     text_box.insert("end", item)
+     text_box.insert("end", "\n")
 
 
 def setup_main_window():

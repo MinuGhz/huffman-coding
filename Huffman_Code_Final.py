@@ -195,6 +195,6 @@ def print_huffman_codes(huffman_code_instance):
 
     print("Huffman Codes:")
     for char, code in huffman_code_instance._HuffmanCode__code.items():
-        result.append(f"{char} = {code}")
+        result.append([f"{char} = {code}"])
         print(f"{char} = {code}")
     return result
