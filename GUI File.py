@@ -16,6 +16,8 @@ def compress():
         # Initialize HuffmanCode with the selected file and compress
         huffman_instance = huffman.HuffmanCode(file_path)
         huffman_instance.compress()
+        output = huffman.print_huffman_codes(huffman_instance)
+        open_decoding_window(output)
         messagebox.showinfo("Compress", "Compression finished successfully")
     except Exception as e:
         messagebox.showerror("Error", f"Compression failed: {str(e)}")
@@ -38,14 +40,14 @@ def decompress():
 def open_generate_file_window():
     txtfile_creator.create_large_text_file(10)
     messagebox.showinfo("File Generated", "File Generated successfully. Size: 10MB")
-def open_decoding_window():
+def open_decoding_window(output = ""):
     dec_win = ctk.CTkToplevel(root)
     dec_win.title("Show Decoding")
     dec_win.geometry("450x350")
     ctk.CTkLabel(dec_win, text="Decoding Output:", font=("Arial", 14)).pack(pady=10)
     text_box = scrolledtext.ScrolledText(dec_win, width=50, height=10)
     text_box.pack(pady=5)
-    text_box.insert("end", "Decoding output placeholder")
+    text_box.insert("end", output)
 
 
 def setup_main_window():

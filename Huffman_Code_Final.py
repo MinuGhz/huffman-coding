@@ -181,3 +181,20 @@ class HuffmanCode:
         
         return output_path
 
+def print_huffman_codes(huffman_code_instance):
+    """
+    Prints the Huffman codes for all characters in the HuffmanCode instance.
+
+    Args:
+        huffman_code_instance (HuffmanCode): An instance of the HuffmanCode class.
+    """
+    result = []
+    if not huffman_code_instance._HuffmanCode__code:
+        print("No Huffman codes have been generated yet.")
+        return
+
+    print("Huffman Codes:")
+    for char, code in huffman_code_instance._HuffmanCode__code.items():
+        result.append(f"{char} = {code}")
+        print(f"{char} = {code}")
+    return result
