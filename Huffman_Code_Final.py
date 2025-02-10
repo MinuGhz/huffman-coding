@@ -142,14 +142,14 @@ class HuffmanCode:
                 current_bits = ""
         return ''.join(decoded_text)
 
-    def decompress(self, input_path):
+    def decompress(self):
         """
         Decompresses the Huffman encoded binary file back into its original text.
         """
-        filename, _ = os.path.splitext(input_path)
+        filename, _ = os.path.splitext(self.path)
         output_path = filename + '_decompressed.txt'
         
-        with open(input_path, 'rb') as file:
+        with open(self.path, 'rb') as file:
             frequency_data = b""
             while True:
                 byte = file.read(1)
@@ -167,7 +167,7 @@ class HuffmanCode:
         self.__build_binary_tree()
         self.__build_tree_code()
         
-        with open(input_path, 'rb') as file:
+        with open(self.path, 'rb') as file:
             file.readline()
             bit_string = ''.join(format(byte, '08b') for byte in file.read())
         
@@ -186,6 +186,6 @@ class HuffmanCode:
 Huffman = HuffmanCode("large_file.bin")
 #Huffman.compress()
 
-Huffman.decompress("large_file.bin")
+Huffman.decompress()
 
 print("Hallo")
