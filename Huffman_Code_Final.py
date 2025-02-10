@@ -184,8 +184,6 @@ class HuffmanCode:
 def print_huffman_codes(huffman_code_instance):
     """
     Prints the Huffman codes for all characters in the HuffmanCode instance.
-
-<<<<<<< main
     Args:
         huffman_code_instance (HuffmanCode): An instance of the HuffmanCode class.
     """
@@ -199,13 +197,3 @@ def print_huffman_codes(huffman_code_instance):
         result.append([f"{char} = {code}"])
         print(f"{char} = {code}")
     return result
-=======
-#main
-Huffman = HuffmanCode("large_file.bin")
-#Huffman.compress()
-
-Huffman.decompress()
-
-print("Hallo")
->>>>>>> main
-
