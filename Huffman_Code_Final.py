@@ -181,9 +181,3 @@ class HuffmanCode:
         
         return output_path
 
-
-#main
-Huffman = HuffmanCode("large_file.bin")
-#Huffman.compress()
-
-Huffman.decompress("large_file.bin")

@@ -1,14 +1,39 @@
 import customtkinter as ctk
 from tkinter import messagebox, scrolledtext
 import txtfile_creator
+import Huffman_Code_Final as huffman
 
+huffman_instance = None
 def compress():
-    messagebox.showinfo("Compress", "Compression finished successfully")
-
+    # Open file dialog to select the input file for compression
+    file_path = ctk.filedialog.askopenfilename(
+        title="Select File to Compress",
+        filetypes=[("All Files", "*.*")]  # You can specify file types if needed
+    )
+    if not file_path:  # User canceled the dialog
+        return
+    try:
+        # Initialize HuffmanCode with the selected file and compress
+        huffman_instance = huffman.HuffmanCode(file_path)
+        huffman_instance.compress()
+        messagebox.showinfo("Compress", "Compression finished successfully")
+    except Exception as e:
+        messagebox.showerror("Error", f"Compression failed: {str(e)}")
 
 def decompress():
-    messagebox.showinfo("Decompress", "Decompression finished successfully")
-
+    # Open file dialog to select the input file for decompression
+    file_path = ctk.filedialog.askopenfilename(
+        title="Select File to Decompress",
+        filetypes=[("All Files", "*.*")]  # Adjust file types if needed (e.g., "*.huff")
+    )
+    if not file_path:  # User canceled the dialog
+        return
+    try:
+        huffman_instance = huffman.HuffmanCode(file_path)
+        huffman_instance.decompress(file_path)  # Assumes decompress() uses the input path
+        messagebox.showinfo("Decompress", "Decompression finished successfully")
+    except Exception as e:
+        messagebox.showerror("Error", f"Decompression failed: {str(e)}")
 
 def open_generate_file_window():
     txtfile_creator.create_large_text_file(10)
